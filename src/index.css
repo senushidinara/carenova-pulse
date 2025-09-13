@@ -9,24 +9,24 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Medical-grade color system */
-    --background: 248 250 252;
+    --background: 210 40% 98%;
     --foreground: 213 27% 14%;
 
-    --card: 255 255 255;
+    --card: 0 0% 100%;
     --card-foreground: 213 27% 14%;
 
-    --popover: 255 255 255;
+    --popover: 0 0% 100%;
     --popover-foreground: 213 27% 14%;
 
     /* Light sky blue primary */
     --primary: 199 89% 48%;
-    --primary-foreground: 255 255 255;
+    --primary-foreground: 0 0% 100%;
     --primary-light: 199 89% 58%;
     --primary-dark: 199 89% 38%;
 
     /* Light pink secondary */
     --secondary: 330 81% 60%;
-    --secondary-foreground: 255 255 255;
+    --secondary-foreground: 0 0% 100%;
     --secondary-light: 330 81% 70%;
 
     /* Neutral medical grays */
@@ -38,11 +38,11 @@ All colors MUST be HSL.
 
     /* Medical alert colors */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 255 255 255;
+    --destructive-foreground: 0 0% 100%;
     --warning: 330 81% 60%;
-    --warning-foreground: 255 255 255;
+    --warning-foreground: 0 0% 100%;
     --success: 270 50% 55%;
-    --success-foreground: 255 255 255;
+    --success-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
@@ -54,7 +54,7 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(199 89% 48%), hsl(199 89% 58%));
     --gradient-secondary: linear-gradient(135deg, hsl(330 81% 60%), hsl(330 81% 70%));
     --gradient-hero: linear-gradient(135deg, hsl(199 89% 48%) 0%, hsl(330 81% 60%) 50%, hsl(270 50% 55%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(255 255 255) 0%, hsl(248 250 252) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
 
     /* Pastel shadows */
     --shadow-medical: 0 4px 20px -2px hsl(199 89% 48% / 0.1);
