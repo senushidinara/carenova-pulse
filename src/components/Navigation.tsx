@@ -50,7 +50,8 @@ const Navigation = () => {
                     className="text-muted-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2"
                     onClick={(e) => {
                       e.preventDefault();
-                      document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
+                      window.location.hash = item.href.replace('#','');
+                      document.getElementById('app-tabs')?.scrollIntoView({ behavior: 'smooth' });
                     }}
                   >
                     <Icon className="h-4 w-4" />
@@ -102,7 +103,8 @@ const Navigation = () => {
                     className="text-muted-foreground hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors flex items-center gap-2"
                     onClick={(e) => {
                       e.preventDefault();
-                      document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
+                      window.location.hash = item.href.replace('#','');
+                      document.getElementById('app-tabs')?.scrollIntoView({ behavior: 'smooth' });
                       setIsOpen(false);
                     }}
                   >
