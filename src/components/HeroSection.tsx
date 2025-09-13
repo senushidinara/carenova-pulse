@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Play, Shield, Zap, Users, Calendar } from "lucide-react";
-import heroImage from "@/assets/medical-hero.jpg";
+const heroImage = "https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2Fe3e09a32339c42dd9183b5ca8c728cfd?format=webp&width=1200";
 
 const HeroSection = () => {
   return (
