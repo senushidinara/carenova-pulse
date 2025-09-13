@@ -5,6 +5,10 @@ import EEGVisualization from "@/components/EEGVisualization";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import {
   Database,
   Video,
@@ -19,10 +23,15 @@ import {
   Heart,
   Zap,
   CheckCircle2,
+  FileText,
+  Stethoscope,
+  Send,
   ArrowRight
 } from "lucide-react";
 
 const Index = () => {
+  const { toast } = useToast();
+
   const features = [
     {
       icon: Database,
@@ -141,12 +150,188 @@ const Index = () => {
     { icon: Zap, value: "2.3s", label: "Avg Response Time" }
   ];
 
+  const submitHandler = (msg: string) => (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({ title: msg, description: "Action completed successfully." });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
-      {/* Hero Section */}
       <HeroSection />
+
+      {/* Records Section */}
+      <section id="records" className="py-20 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4">
+              <FileText className="h-3 w-3 mr-1" />
+              Records
+            </Badge>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Centralized Medical Records</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              View medications, allergies, lab results, imaging, and a full history timeline.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-6">
+            {["Medications", "Lab Results", "Imaging"].map((title, i) => (
+              <Card key={i} className="card-shadow">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Stethoscope className="h-5 w-5 text-primary" />
+                    {title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-sm text-muted-foreground">
+                  <div className="flex justify-between"><span>Name</span><span>Status</span></div>
+                  <div className="flex justify-between"><span>Example item</span><span>Active</span></div>
+                  <div className="flex justify-between"><span>Example item</span><span>Archived</span></div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Consultations Section */}
+      <section id="consultations" className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <Badge variant="outline" className="mb-4">
+                <Calendar className="h-3 w-3 mr-1" />
+                Consultations
+              </Badge>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Hybrid Consultations</h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                Request a virtual or in-person appointment. We will confirm availability via email.
+              </p>
+
+              <form onSubmit={submitHandler("Consultation request sent") } className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="name">Full Name</Label>
+                    <Input id="name" placeholder="Jane Doe" required />
+                  </div>
+                  <div>
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" type="email" placeholder="jane@example.com" required />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="date">Preferred Date</Label>
+                    <Input id="date" type="date" required />
+                  </div>
+                  <div>
+                    <Label htmlFor="type">Type</Label>
+                    <Input id="type" placeholder="Virtual / In-person" required />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="notes">Notes</Label>
+                  <Textarea id="notes" placeholder="Symptoms or purpose of visit" />
+                </div>
+                <Button type="submit" variant="hero" size="lg" className="w-full sm:w-auto">
+                  Submit Request
+                </Button>
+              </form>
+            </div>
+
+            <Card className="p-6 card-shadow">
+              <CardHeader>
+                <CardTitle>How it works</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-success" />Submit a request</div>
+                <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-success" />We match a clinician</div>
+                <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-success" />Get confirmation by email</div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Insights Section */}
+      <section id="ai" className="py-20 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4">
+              <Brain className="h-3 w-3 mr-1" />
+              AI Insights
+            </Badge>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Clinical AI Insights</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Evidence-backed suggestions to support clinical decisions.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {["Risk Flags", "Treatment Suggestions", "Follow-up Reminders"].map((t, i) => (
+              <Card key={i} className="card-shadow">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Zap className="h-5 w-5 text-secondary" />{t}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-muted-foreground">
+                  Sample content generated from anonymized, aggregated patterns and clinician rules.
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Messages Section */}
+      <section id="messages" className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <Badge variant="outline" className="mb-4">
+                <MessageSquare className="h-3 w-3 mr-1" />
+                Messages
+              </Badge>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4">Secure Messaging</h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                Send a secure message to your care team. You will receive a reply via email.
+              </p>
+
+              <form onSubmit={submitHandler("Message sent") } className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="fromName">Your Name</Label>
+                    <Input id="fromName" placeholder="Jane Doe" required />
+                  </div>
+                  <div>
+                    <Label htmlFor="fromEmail">Your Email</Label>
+                    <Input id="fromEmail" type="email" placeholder="jane@example.com" required />
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea id="message" placeholder="Write your message" required />
+                </div>
+                <Button type="submit" variant="medical" className="w-full sm:w-auto">
+                  <Send className="h-4 w-4 mr-2" /> Send Secure Message
+                </Button>
+              </form>
+            </div>
+
+            <Card className="p-6 card-shadow">
+              <CardHeader>
+                <CardTitle>Messaging Guidelines</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 text-sm text-muted-foreground">
+                <div>Do not include emergency issues. Call local emergency services instead.</div>
+                <div>Response times may vary. For urgent issues, request a consultation.</div>
+                <div>Attachments and images are supported after account verification.</div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
       {/* Stats Section */}
       <section className="py-16 bg-muted/30">
@@ -184,7 +369,6 @@ const Index = () => {
               frequency band analysis, and sleep stage correlation.
             </p>
           </div>
-          
           <EEGVisualization />
         </div>
       </section>
@@ -234,16 +418,8 @@ const Index = () => {
                 Your patient data is protected by military-grade encryption and 
                 comprehensive compliance frameworks that exceed industry standards.
               </p>
-              
               <div className="space-y-4">
-                {[
-                  "HIPAA & HITECH Compliance",
-                  "SOC 2 Type II Certification",
-                  "FDA 21 CFR Part 11 Compliance",
-                  "End-to-end Encryption",
-                  "Zero-trust Architecture",
-                  "Comprehensive Audit Trails"
-                ].map((item, index) => (
+                {["HIPAA & HITECH Compliance","SOC 2 Type II Certification","FDA 21 CFR Part 11 Compliance","End-to-end Encryption","Zero-trust Architecture","Comprehensive Audit Trails"].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircle2 className="h-5 w-5 text-success" />
                     <span>{item}</span>
@@ -251,7 +427,6 @@ const Index = () => {
                 ))}
               </div>
             </div>
-            
             <Card className="p-8 medical-shadow">
               <div className="space-y-6">
                 <div className="text-center">
@@ -259,7 +434,6 @@ const Index = () => {
                   <h3 className="text-xl font-semibold mb-2">Security Score</h3>
                   <div className="text-4xl font-bold text-primary">A+</div>
                 </div>
-                
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-sm">Encryption Strength</span>
@@ -290,7 +464,6 @@ const Index = () => {
             Join thousands of healthcare providers already using Carenova to deliver 
             better patient outcomes with AI-powered insights.
           </p>
-          
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               variant="secondary" 
@@ -309,7 +482,6 @@ const Index = () => {
               Schedule Demo
             </Button>
           </div>
-          
           <p className="text-sm text-white/70 mt-6">
             No credit card required • 30-day free trial • Setup in under 5 minutes
           </p>
@@ -335,17 +507,15 @@ const Index = () => {
                 <Badge variant="outline">FDA Approved</Badge>
               </div>
             </div>
-            
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><a href="#features" className="hover:text-primary">Features</a></li>
                 <li><a href="#security" className="hover:text-primary">Security</a></li>
                 <li><a href="#monitoring" className="hover:text-primary">Monitoring</a></li>
-                <li><a href="#" className="hover:text-primary">Pricing</a></li>
+                <li><a href="#consultations" className="hover:text-primary">Consultations</a></li>
               </ul>
             </div>
-            
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
@@ -356,7 +526,6 @@ const Index = () => {
               </ul>
             </div>
           </div>
-          
           <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
             © 2024 Carenova Healthcare. All rights reserved. Built with security and privacy first.
           </div>
