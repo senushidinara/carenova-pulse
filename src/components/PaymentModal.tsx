@@ -275,8 +275,7 @@ const PaymentModal = ({ isOpen, onClose }: PaymentModalProps) => {
             </Button>
 
             <p className="text-xs text-muted-foreground text-center">
-              By completing this payment, you agree to our Terms of Service and Privacy Policy. 
-              This is a mock payment system for demonstration purposes.
+              By completing this payment, you agree to our Terms of Service and Privacy Policy.
             </p>
           </div>
         </div>

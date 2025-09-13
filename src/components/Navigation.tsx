@@ -34,7 +34,7 @@ const Navigation = () => {
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               <Activity className="h-8 w-8 text-primary mr-2" />
-              <span className="font-bold text-xl text-foreground">Carenova</span>
+              <span className="font-bold text-xl text-foreground">CareNova</span>
             </div>
           </div>
 

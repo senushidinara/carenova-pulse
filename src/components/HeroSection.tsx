@@ -99,7 +99,7 @@ const HeroSection = () => {
             <div className="relative rounded-2xl overflow-hidden medical-shadow">
               <img
                 src={heroImage}
-                alt="Carenova Medical Dashboard"
+                alt="CareNova Medical Dashboard"
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20" />
@@ -115,7 +115,7 @@ const HeroSection = () => {
               <div className="absolute bottom-6 left-6 bg-card/90 backdrop-blur-sm rounded-lg p-4 card-shadow">
                 <div className="text-sm">
                   <div className="font-semibold text-primary">98.7%</div>
-                  <div className="text-muted-foreground">Accuracy Rate</div>
+                  <div className="text-muted-foreground">EEG prediction accuracy</div>
                 </div>
               </div>
             </div>

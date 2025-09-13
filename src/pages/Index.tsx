@@ -147,7 +147,7 @@ const Index = () => {
     { icon: Users, value: "50K+", label: "Active Patients" },
     { icon: Heart, value: "99.9%", label: "Uptime" },
     { icon: Shield, value: "100%", label: "HIPAA Compliant" },
-    { icon: Zap, value: "2.3s", label: "Avg Response Time" }
+    { icon: Zap, value: "2.3 s", label: "Avg Response Time" }
   ];
 
   const submitHandler = (msg: string) => (e: React.FormEvent) => {
@@ -175,21 +175,42 @@ const Index = () => {
           </div>
 
           <div className="grid lg:grid-cols-3 gap-6">
-            {["Medications", "Lab Results", "Imaging"].map((title, i) => (
-              <Card key={i} className="card-shadow">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Stethoscope className="h-5 w-5 text-primary" />
-                    {title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2 text-sm text-muted-foreground">
-                  <div className="flex justify-between"><span>Name</span><span>Status</span></div>
-                  <div className="flex justify-between"><span>Example item</span><span>Active</span></div>
-                  <div className="flex justify-between"><span>Example item</span><span>Archived</span></div>
-                </CardContent>
-              </Card>
-            ))}
+            <Card className="card-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Stethoscope className="h-5 w-5 text-primary" /> Medications
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 text-sm text-muted-foreground">
+                <div className="flex justify-between"><span>Atorvastatin 20 mg</span><span>Active</span></div>
+                <div className="flex justify-between"><span>Metformin 500 mg</span><span>Active</span></div>
+                <div className="flex justify-between"><span>Amoxicillin 500 mg</span><span>Completed</span></div>
+              </CardContent>
+            </Card>
+            <Card className="card-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Stethoscope className="h-5 w-5 text-primary" /> Lab Results
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 text-sm text-muted-foreground">
+                <div className="flex justify-between"><span>CBC</span><span>Normal</span></div>
+                <div className="flex justify-between"><span>HbA1c</span><span>7.1%</span></div>
+                <div className="flex justify-between"><span>Lipid Panel</span><span>Borderline</span></div>
+              </CardContent>
+            </Card>
+            <Card className="card-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Stethoscope className="h-5 w-5 text-primary" /> Imaging
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 text-sm text-muted-foreground">
+                <div className="flex justify-between"><span>Chest X‑ray</span><span>Clear</span></div>
+                <div className="flex justify-between"><span>Brain MRI</span><span>Follow‑up</span></div>
+                <div className="flex justify-between"><span>Abdominal Ultrasound</span><span>Normal</span></div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -373,34 +394,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section id="features" className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4">
-              <Zap className="h-3 w-3 mr-1" />
-              Platform Features
-            </Badge>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Comprehensive Healthcare Platform
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Everything you need for modern healthcare delivery, from patient records 
-              to AI-powered insights, all in one secure platform.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <FeatureCard
-                key={index}
-                {...feature}
-                gradient={index % 3 === 0}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Security & Compliance */}
       <section id="security" className="py-20 bg-background">
@@ -495,7 +488,7 @@ const Index = () => {
             <div className="md:col-span-2">
               <div className="flex items-center mb-4">
                 <Activity className="h-8 w-8 text-primary mr-2" />
-                <span className="font-bold text-xl">Carenova</span>
+                <span className="font-bold text-xl">CareNova</span>
               </div>
               <p className="text-muted-foreground mb-4 max-w-md">
                 Transforming healthcare through AI-powered medical records, 
@@ -527,7 +520,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-            © 2024 Carenova Healthcare. All rights reserved. Built with security and privacy first.
+            © 2024 CareNova Healthcare. All rights reserved. Built with security and privacy as our first priority.
           </div>
         </div>
       </footer>

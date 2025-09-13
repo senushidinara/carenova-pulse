@@ -76,20 +76,20 @@ const EEGVisualization = () => {
 
   const brainRegions = [
     { name: "Frontal", waves: [
-      { frequency: "Delta", color: "#3B82F6", amplitude: 0.5, region: "F3-F4" },
-      { frequency: "Alpha", color: "#10B981", amplitude: 0.8, region: "F3-F4" },
+      { frequency: "Delta", color: "#60A5FA", amplitude: 0.5, region: "F3-F4" },
+      { frequency: "Alpha", color: "#EC4899", amplitude: 0.8, region: "F3-F4" },
     ]},
     { name: "Temporal", waves: [
-      { frequency: "Theta", color: "#8B5CF6", amplitude: 0.6, region: "T3-T4" },
-      { frequency: "Beta", color: "#F59E0B", amplitude: 1.2, region: "T3-T4" },
+      { frequency: "Theta", color: "#A78BFA", amplitude: 0.6, region: "T3-T4" },
+      { frequency: "Beta", color: "#38BDF8", amplitude: 1.2, region: "T3-T4" },
     ]},
     { name: "Parietal", waves: [
-      { frequency: "Alpha", color: "#10B981", amplitude: 0.7, region: "P3-P4" },
-      { frequency: "Gamma", color: "#EF4444", amplitude: 1.5, region: "P3-P4" },
+      { frequency: "Alpha", color: "#EC4899", amplitude: 0.7, region: "P3-P4" },
+      { frequency: "Gamma", color: "#A78BFA", amplitude: 1.5, region: "P3-P4" },
     ]},
     { name: "Occipital", waves: [
-      { frequency: "Alpha", color: "#10B981", amplitude: 0.9, region: "O1-O2" },
-      { frequency: "Delta", color: "#3B82F6", amplitude: 0.4, region: "O1-O2" },
+      { frequency: "Alpha", color: "#EC4899", amplitude: 0.9, region: "O1-O2" },
+      { frequency: "Delta", color: "#60A5FA", amplitude: 0.4, region: "O1-O2" },
     ]},
   ];
 
