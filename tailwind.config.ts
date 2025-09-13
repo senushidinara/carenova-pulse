@@ -22,14 +22,25 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          light: "hsl(var(--primary-light))",
+          dark: "hsl(var(--primary-dark))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+          light: "hsl(var(--secondary-light))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -46,6 +57,13 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        eeg: {
+          delta: "hsl(var(--eeg-delta))",
+          theta: "hsl(var(--eeg-theta))",
+          alpha: "hsl(var(--eeg-alpha))",
+          beta: "hsl(var(--eeg-beta))",
+          gamma: "hsl(var(--eeg-gamma))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -80,10 +98,30 @@ export default {
             height: "0",
           },
         },
+        "eeg-wave": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        "pulse-medical": {
+          "0%, 100%": { opacity: "0.6" },
+          "50%": { opacity: "1" },
+        },
+        "slide-up": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.95)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "eeg-wave": "eeg-wave 3s linear infinite",
+        "pulse-medical": "pulse-medical 2s ease-in-out infinite",
+        "slide-up": "slide-up 0.6s ease-out",
+        "scale-in": "scale-in 0.3s ease-out",
       },
     },
   },
