@@ -18,55 +18,55 @@ All colors MUST be HSL.
     --popover: 255 255 255;
     --popover-foreground: 213 27% 14%;
 
-    /* Medical blue primary */
-    --primary: 213 94% 42%;
+    /* Light sky blue primary */
+    --primary: 199 89% 48%;
     --primary-foreground: 255 255 255;
-    --primary-light: 213 94% 52%;
-    --primary-dark: 213 94% 32%;
+    --primary-light: 199 89% 58%;
+    --primary-dark: 199 89% 38%;
 
-    /* Medical green secondary */
-    --secondary: 142 76% 36%;
+    /* Light pink secondary */
+    --secondary: 330 81% 60%;
     --secondary-foreground: 255 255 255;
-    --secondary-light: 142 76% 46%;
+    --secondary-light: 330 81% 70%;
 
     /* Neutral medical grays */
     --muted: 220 14% 96%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 213 94% 96%;
-    --accent-foreground: 213 94% 42%;
+    --accent: 270 50% 88%;
+    --accent-foreground: 270 50% 25%;
 
     /* Medical alert colors */
     --destructive: 0 84% 60%;
     --destructive-foreground: 255 255 255;
-    --warning: 43 96% 56%;
-    --warning-foreground: 25 95% 12%;
-    --success: 142 76% 36%;
+    --warning: 330 81% 60%;
+    --warning-foreground: 255 255 255;
+    --success: 270 50% 55%;
     --success-foreground: 255 255 255;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 213 94% 42%;
+    --ring: 199 89% 48%;
 
     --radius: 0.75rem;
 
-    /* Medical gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(213 94% 42%), hsl(213 94% 52%));
-    --gradient-secondary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
-    --gradient-hero: linear-gradient(135deg, hsl(213 94% 42%) 0%, hsl(142 76% 36%) 100%);
+    /* Pastel gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(199 89% 48%), hsl(199 89% 58%));
+    --gradient-secondary: linear-gradient(135deg, hsl(330 81% 60%), hsl(330 81% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(199 89% 48%) 0%, hsl(330 81% 60%) 50%, hsl(270 50% 55%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(255 255 255) 0%, hsl(248 250 252) 100%);
 
-    /* Medical shadows */
-    --shadow-medical: 0 4px 20px -2px hsl(213 94% 42% / 0.1);
-    --shadow-card: 0 2px 10px -2px hsl(213 27% 14% / 0.08);
-    --shadow-floating: 0 8px 30px -4px hsl(213 94% 42% / 0.15);
+    /* Pastel shadows */
+    --shadow-medical: 0 4px 20px -2px hsl(199 89% 48% / 0.1);
+    --shadow-card: 0 2px 10px -2px hsl(270 50% 25% / 0.08);
+    --shadow-floating: 0 8px 30px -4px hsl(199 89% 48% / 0.15);
 
-    /* EEG waveform colors */
-    --eeg-delta: 220 70% 50%;
-    --eeg-theta: 280 70% 50%;
-    --eeg-alpha: 160 70% 50%;
-    --eeg-beta: 40 70% 50%;
-    --eeg-gamma: 0 70% 50%;
+    /* EEG waveform colors - pastel theme */
+    --eeg-delta: 199 89% 58%;
+    --eeg-theta: 270 50% 65%;
+    --eeg-alpha: 330 81% 70%;
+    --eeg-beta: 199 89% 48%;
+    --eeg-gamma: 270 50% 55%;
 
     /* Animation durations */
     --transition-medical: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
