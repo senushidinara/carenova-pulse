@@ -7,12 +7,15 @@ import {
   Shield, 
   Stethoscope,
   Menu,
-  X
+  X,
+  CreditCard
 } from "lucide-react";
 import { useState } from "react";
+import PaymentModal from "./PaymentModal";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   const navItems = [
     { icon: Stethoscope, label: "Records", href: "#records" },
@@ -59,7 +62,8 @@ const Navigation = () => {
             <Button variant="outline" size="sm">
               Sign In
             </Button>
-            <Button variant="medical" size="sm">
+            <Button variant="medical" size="sm" onClick={() => setIsPaymentModalOpen(true)}>
+              <CreditCard className="h-4 w-4 mr-2" />
               Get Started
             </Button>
           </div>
@@ -97,7 +101,8 @@ const Navigation = () => {
                 <Button variant="outline" size="sm" className="w-full">
                   Sign In
                 </Button>
-                <Button variant="medical" size="sm" className="w-full">
+                <Button variant="medical" size="sm" className="w-full" onClick={() => setIsPaymentModalOpen(true)}>
+                  <CreditCard className="h-4 w-4 mr-2" />
                   Get Started
                 </Button>
               </div>
@@ -105,6 +110,11 @@ const Navigation = () => {
           </div>
         )}
       </div>
+      
+      <PaymentModal 
+        isOpen={isPaymentModalOpen} 
+        onClose={() => setIsPaymentModalOpen(false)} 
+      />
     </nav>
   );
 };
