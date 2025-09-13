@@ -59,7 +59,13 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                document.getElementById("consultations")?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               Sign In
             </Button>
             <Button variant="medical" size="sm" onClick={() => setIsPaymentModalOpen(true)}>
@@ -98,7 +104,14 @@ const Navigation = () => {
                 );
               })}
               <div className="pt-4 space-y-2">
-                <Button variant="outline" size="sm" className="w-full">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                  onClick={() => {
+                    document.getElementById("consultations")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
                   Sign In
                 </Button>
                 <Button variant="medical" size="sm" className="w-full" onClick={() => setIsPaymentModalOpen(true)}>
