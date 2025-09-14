@@ -90,3 +90,9 @@ export async function getBalance(address: string): Promise<string> {
   const uxion = balances.find((b) => b.denom === MIN_DENOM);
   return formatAmount(uxion?.amount ?? "0");
 }
+
+export async function pingChain(): Promise<string> {
+  const client = await StargateClient.connect(RPC_URL);
+  const id = await client.getChainId();
+  return id;
+}
