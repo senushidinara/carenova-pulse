@@ -84,15 +84,41 @@ export async function connectWallet(): Promise<string> {
   return currentAddress;
 }
 
+async function fetchJson<T = any>(url: string): Promise<T> {
+  const res = await fetch(url, { mode: "cors" });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return (await res.json()) as T;
+}
+
 export async function getBalance(address: string): Promise<string> {
-  const client = await StargateClient.connect(RPC_URL);
-  const balances = await client.getAllBalances(address);
-  const uxion = balances.find((b) => b.denom === MIN_DENOM);
-  return formatAmount(uxion?.amount ?? "0");
+  try {
+    const client = await StargateClient.connect(RPC_URL);
+    const balances = await client.getAllBalances(address);
+    const uxion = balances.find((b) => b.denom === MIN_DENOM);
+    return formatAmount(uxion?.amount ?? "0");
+  } catch (_) {
+    try {
+      const data = await fetchJson<{ balances: { denom: string; amount: string }[] }>(
+        `${REST_URL}/cosmos/bank/v1beta1/balances/${address}`,
+      );
+      const uxion = data.balances?.find((b) => b.denom === MIN_DENOM)?.amount ?? "0";
+      return formatAmount(uxion);
+    } catch (e: any) {
+      throw new Error("Unable to fetch balance from XION endpoints.");
+    }
+  }
 }
 
 export async function pingChain(): Promise<string> {
-  const client = await StargateClient.connect(RPC_URL);
-  const id = await client.getChainId();
-  return id;
+  try {
+    const client = await StargateClient.connect(RPC_URL);
+    return await client.getChainId();
+  } catch (_) {
+    try {
+      const info = await fetchJson<any>(`${REST_URL}/cosmos/base/tendermint/v1beta1/node_info`);
+      return info?.default_node_info?.network || info?.node_info?.network || CHAIN_ID;
+    } catch (e: any) {
+      throw new Error("XION network unreachable right now. Please retry.");
+    }
+  }
 }
