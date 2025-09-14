@@ -63,7 +63,7 @@ const Index = () => {
       toast({ title: msg });
       setInput("");
     } catch (e: any) {
-      toast({ title: "Write failed", description: e.message, variant: "destructive" as any });
+      toast({ title: "Write failed", description: e.message, variant: "destructive" });
     }
   };
 
