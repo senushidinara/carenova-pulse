@@ -1,37 +1,23 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getBalance, pingChain } from "@/xion";
-
-const ADDRESS = "xion1jr9cy3dy9fhyjlg35gq3hjuqjzs6j7pd90e0c0uvjj3j8y6stlusxegg20";
+import { pingChain } from "@/xion";
+import { Shield } from "lucide-react";
 
 const CareNovaTestnet = () => {
-  const [balance, setBalance] = useState<string>("");
-  const [network, setNetwork] = useState<string>("");
-  const [record, setRecord] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const refresh = async () => {
+  const check = async () => {
     setLoading(true);
     try {
-      const [id, bal] = await Promise.all([pingChain(), getBalance(ADDRESS)]);
-      setNetwork(id);
-      setBalance(bal);
-      const mockRecord = {
-        patientName: "Maya Senushi",
-        age: 20,
-        lastVisit: "2025-09-14",
-        allergies: ["Penicillin"],
-        medications: ["Vitamin D"],
-      };
-      setRecord(JSON.stringify(mockRecord, null, 2));
+      await pingChain();
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    refresh();
+    // no-op on mount
   }, []);
 
   return (
@@ -39,16 +25,9 @@ const CareNovaTestnet = () => {
       <CardHeader>
         <CardTitle>CareNova – Health Record (XION Testnet)</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3 text-sm">
-        <div>Network: {network || "Checking..."}</div>
-        <div>Wallet Address: {ADDRESS}</div>
-        <div>Balance: {balance || "Loading..."}</div>
-        <div className="pt-2">
-          <div className="font-medium mb-1">Current Record:</div>
-          <pre className="bg-muted p-3 rounded-md overflow-x-auto text-xs">{record || "Loading..."}</pre>
-        </div>
-        <Button onClick={refresh} disabled={loading} variant="secondary">
-          {loading ? "Refreshing..." : "Refresh"}
+      <CardContent className="flex">
+        <Button onClick={check} disabled={loading} variant="hero" size="xl" className="mx-auto">
+          <Shield className="h-5 w-5" /> XION Testnet
         </Button>
       </CardContent>
     </Card>
