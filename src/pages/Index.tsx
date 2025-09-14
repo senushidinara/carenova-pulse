@@ -201,35 +201,39 @@ const Index = () => {
       {/* XION Testnet Demo */}
       <section id="xion" className="py-12 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="card-shadow">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-primary" />
-CareNova - XION Testnet (Keplr)
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                  <Button onClick={handleCheckNetwork} variant="secondary">Check XION Network</Button>
-                  <div className="text-sm">Status: {networkId ? `Available • ${networkId}` : "Not checked"}</div>
-                </div>
-
-                {!wallet ? (
-                  <Button onClick={handleConnect}>Connect Keplr (XION)</Button>
-                ) : (
-                  <div className="text-sm text-muted-foreground">Connected: {wallet} • Network: xion-testnet-2</div>
-                )}
-
-                {wallet && (
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="card-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-primary" />
+                  Keplr Connection (Optional)
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col gap-4">
                   <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                    <Button onClick={handleRefreshBalance} variant="secondary">Refresh Balance</Button>
-                    <div className="text-sm">Balance: {balance || "0 XION"}</div>
+                    <Button onClick={handleCheckNetwork} variant="secondary">Check XION Network</Button>
+                    <div className="text-sm">Status: {networkId ? `Available • ${networkId}` : "Not checked"}</div>
                   </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+
+                  {!wallet ? (
+                    <Button onClick={handleConnect}>Connect Keplr (XION)</Button>
+                  ) : (
+                    <div className="text-sm text-muted-foreground">Connected: {wallet} • Network: xion-testnet-2</div>
+                  )}
+
+                  {wallet && (
+                    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                      <Button onClick={handleRefreshBalance} variant="secondary">Refresh Balance</Button>
+                      <div className="text-sm">Balance: {balance || "0 XION"}</div>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <CareNovaTestnet />
+          </div>
         </div>
       </section>
 
