@@ -74,8 +74,16 @@ CareNova’s unified ecosystem works seamlessly to **connect patients, clinician
 - **Tools & DevOps:** GitHub, Docker, Vercel (frontend hosting), Heroku (backend), Figma  
 - **Other Libraries:** Chart.js / D3.js for interactive dashboards, AR.js for augmented reality visualizations  
 
----
 
+🌌 Future Vision
+	•	AI-driven predictive health for chronic conditions
+	•	Full telemedicine & real-time messaging
+	•	Mobile-first & offline-ready access
+	•	Global community hubs to reduce inequity
+	•	Sustainable workflows and optimized operations 🌱
+
+ 📚 References
+	•	Deloitte. (2023). 2023 Global Health Care Outlook. Link
 
 ---
 
