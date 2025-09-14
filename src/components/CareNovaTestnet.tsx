@@ -8,6 +8,7 @@ const ADDRESS = "xion1jr9cy3dy9fhyjlg35gq3hjuqjzs6j7pd90e0c0uvjj3j8y6stlusxegg20
 const CareNovaTestnet = () => {
   const [balance, setBalance] = useState<string>("");
   const [network, setNetwork] = useState<string>("");
+  const [record, setRecord] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const refresh = async () => {
@@ -16,6 +17,14 @@ const CareNovaTestnet = () => {
       const [id, bal] = await Promise.all([pingChain(), getBalance(ADDRESS)]);
       setNetwork(id);
       setBalance(bal);
+      const mockRecord = {
+        patientName: "Maya Senushi",
+        age: 20,
+        lastVisit: "2025-09-14",
+        allergies: ["Penicillin"],
+        medications: ["Vitamin D"],
+      };
+      setRecord(JSON.stringify(mockRecord, null, 2));
     } finally {
       setLoading(false);
     }
@@ -28,12 +37,16 @@ const CareNovaTestnet = () => {
   return (
     <Card className="card-shadow">
       <CardHeader>
-        <CardTitle>CareNova – XION Testnet (Read-only)</CardTitle>
+        <CardTitle>CareNova – Health Record (XION Testnet)</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3 text-sm">
         <div>Network: {network || "Checking..."}</div>
         <div>Wallet Address: {ADDRESS}</div>
         <div>Balance: {balance || "Loading..."}</div>
+        <div className="pt-2">
+          <div className="font-medium mb-1">Current Record:</div>
+          <pre className="bg-muted p-3 rounded-md overflow-x-auto text-xs">{record || "Loading..."}</pre>
+        </div>
         <Button onClick={refresh} disabled={loading} variant="secondary">
           {loading ? "Refreshing..." : "Refresh"}
         </Button>
