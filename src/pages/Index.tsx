@@ -219,9 +219,7 @@ const Index = () => {
                   {!wallet ? (
                   (typeof window !== "undefined" && (window as any).keplr) ? (
                     <Button onClick={handleConnect}>Connect Keplr (XION)</Button>
-                  ) : (
-                    <div className="text-sm text-muted-foreground">Keplr not detected. Read-only mode active.</div>
-                  )
+                  ) : null
                 ) : (
                   <div className="text-sm text-muted-foreground">Connected: {wallet} • Network: xion-testnet-2</div>
                 )}
