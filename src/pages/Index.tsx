@@ -53,7 +53,7 @@ const Index = () => {
       setRecord(value);
       toast({ title: "Record fetched" });
     } catch (e: any) {
-      toast({ title: "Read failed", description: e.message, variant: "destructive" as any });
+      toast({ title: "Read failed", description: e.message, variant: "destructive" });
     }
   };
 
