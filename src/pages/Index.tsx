@@ -199,9 +199,9 @@ CareNova - XION Testnet (Keplr)
             <CardContent>
               <div className="flex flex-col gap-4">
                 {!wallet ? (
-                  <Button onClick={handleConnect}>Connect Wallet</Button>
+                  <Button onClick={handleConnect}>Connect Keplr (XION)</Button>
                 ) : (
-                  <div className="text-sm text-muted-foreground">Connected: {wallet}</div>
+                  <div className="text-sm text-muted-foreground">Connected: {wallet} • Network: xion-testnet-2</div>
                 )}
 
                 <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
