@@ -1,4 +1,4 @@
-import { SigningStargateClient, StargateClient, assertIsDeliverTxSuccess } from "@cosmjs/stargate";
+import { SigningStargateClient, StargateClient } from "@cosmjs/stargate";
 import type { OfflineSigner } from "@cosmjs/proto-signing";
 import type { ChainInfo, Keplr } from "@keplr-wallet/types";
 
