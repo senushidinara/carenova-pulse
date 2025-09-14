@@ -43,7 +43,7 @@ const Index = () => {
       setWallet(addr);
       toast({ title: "Wallet connected", description: addr });
     } catch (e: any) {
-      toast({ title: "Connection failed", description: e.message, variant: "destructive" as any });
+      toast({ title: "Connection failed", description: e.message, variant: "destructive" });
     }
   };
 
