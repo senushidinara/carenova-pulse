@@ -1,51 +1,92 @@
-import * as ethers from "ethers";
+import { SigningStargateClient, StargateClient } from "@cosmjs/stargate";
+import type { OfflineSigner } from "@cosmjs/proto-signing";
+import type { ChainInfo, Keplr } from "@keplr-wallet/types";
 
-const XION_RPC: string = (import.meta as any).env?.VITE_XION_RPC || "https://rpc.xion-testnet-2.burnt.com:443";
-const CONTRACT_ADDRESS: string | undefined = (import.meta as any).env?.VITE_XION_CONTRACT_ADDRESS;
+const CHAIN_ID = "xion-testnet-2";
+const RPC_URL: string = (import.meta as any).env?.VITE_XION_RPC || "https://rpc.xion-testnet-2.burnt.com:443";
+const REST_URL: string = (import.meta as any).env?.VITE_XION_REST || "https://api.xion-testnet-2.burnt.com";
+const BECH32_PREFIX = "xion";
+const MIN_DENOM = "uxion";
+const DISPLAY_DENOM = "XION";
+const DECIMALS = 6;
 
-const ABI = [
-  "function setRecord(string _record) public",
-  "function getRecord() public view returns (string)"
-];
+let signingClient: SigningStargateClient | null = null;
+let currentAddress: string | null = null;
 
-let provider: ethers.BrowserProvider | null = null;
-let signer: ethers.Signer | null = null;
-let contract: ethers.Contract | null = null;
+function formatAmount(minAmount: string): string {
+  const n = Number(minAmount) / 10 ** DECIMALS;
+  return `${n.toLocaleString(undefined, { maximumFractionDigits: DECIMALS })} ${DISPLAY_DENOM}`;
+}
 
-function requireAddress(): string {
-  if (!CONTRACT_ADDRESS || CONTRACT_ADDRESS.trim().length === 0) {
-    throw new Error("VITE_XION_CONTRACT_ADDRESS is not set. Please configure it in your environment.");
+async function suggestChain(keplr: Keplr): Promise<void> {
+  const chainInfo: ChainInfo = {
+    chainId: CHAIN_ID,
+    chainName: "XION Testnet-2",
+    rpc: RPC_URL,
+    rest: REST_URL,
+    bip44: { coinType: 118 },
+    bech32Config: {
+      bech32PrefixAccAddr: BECH32_PREFIX,
+      bech32PrefixAccPub: `${BECH32_PREFIX}pub`,
+      bech32PrefixValAddr: `${BECH32_PREFIX}valoper`,
+      bech32PrefixValPub: `${BECH32_PREFIX}valoperpub`,
+      bech32PrefixConsAddr: `${BECH32_PREFIX}valcons`,
+      bech32PrefixConsPub: `${BECH32_PREFIX}valconspub`,
+    },
+    currencies: [
+      {
+        coinDenom: DISPLAY_DENOM,
+        coinMinimalDenom: MIN_DENOM,
+        coinDecimals: DECIMALS,
+      },
+    ],
+    feeCurrencies: [
+      {
+        coinDenom: DISPLAY_DENOM,
+        coinMinimalDenom: MIN_DENOM,
+        coinDecimals: DECIMALS,
+        gasPriceStep: { low: 0.01, average: 0.025, high: 0.04 },
+      },
+    ],
+    stakeCurrency: {
+      coinDenom: DISPLAY_DENOM,
+      coinMinimalDenom: MIN_DENOM,
+      coinDecimals: DECIMALS,
+    },
+    features: ["stargate"],
+  };
+
+  // Only available on desktop extension
+  // @ts-expect-error experimentalSuggestChain exists on Keplr extension
+  if (keplr.experimentalSuggestChain) {
+    // @ts-ignore
+    await keplr.experimentalSuggestChain(chainInfo);
   }
-  return CONTRACT_ADDRESS;
 }
 
 export async function connectWallet(): Promise<string> {
-  const eth = (window as any).ethereum;
-  if (!eth) {
-    throw new Error("Please install MetaMask to continue.");
+  const w = window as any;
+  const keplr: Keplr | undefined = w.keplr;
+  if (!keplr) {
+    throw new Error("Please install Keplr extension to continue.");
   }
-  provider = new ethers.BrowserProvider(eth);
-  await provider.send("eth_requestAccounts", []);
-  signer = await provider.getSigner();
-  const address = await signer.getAddress();
-  contract = new ethers.Contract(requireAddress(), ABI, signer);
-  return address;
+
+  await suggestChain(keplr);
+  await keplr.enable(CHAIN_ID);
+
+  const offlineSigner: OfflineSigner = (w.getOfflineSignerAuto
+    ? await w.getOfflineSignerAuto(CHAIN_ID)
+    : w.getOfflineSigner(CHAIN_ID)) as OfflineSigner;
+
+  const accounts = await offlineSigner.getAccounts();
+  currentAddress = accounts[0].address;
+  signingClient = await SigningStargateClient.connectWithSigner(RPC_URL, offlineSigner);
+  return currentAddress;
 }
 
-export async function readRecord(): Promise<string> {
-  if (!contract) {
-    const roProvider = new ethers.JsonRpcProvider(XION_RPC);
-    const roContract = new ethers.Contract(requireAddress(), ABI, roProvider);
-    return await roContract.getRecord();
-  }
-  return await contract.getRecord();
-}
-
-export async function writeRecord(newRecord: string): Promise<string> {
-  if (!contract) {
-    throw new Error("Connect wallet first");
-  }
-  const tx = await contract.setRecord(newRecord);
-  await tx.wait();
-  return "Record updated";
+export async function getBalance(address: string): Promise<string> {
+  const client = await StargateClient.connect(RPC_URL);
+  const balances = await client.getAllBalances(address);
+  const uxion = balances.find((b) => b.denom === MIN_DENOM);
+  return formatAmount(uxion?.amount ?? "0");
 }

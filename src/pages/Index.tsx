@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { connectWallet, readRecord, writeRecord } from "@/xion";
+import { connectWallet, getBalance } from "@/xion";
 import {
   Database,
   Video,
@@ -34,8 +34,7 @@ import {
 const Index = () => {
   const { toast } = useToast();
   const [wallet, setWallet] = useState<string | null>(null);
-  const [record, setRecord] = useState<string>("");
-  const [input, setInput] = useState<string>("");
+  const [balance, setBalance] = useState<string>("");
 
   const handleConnect = async () => {
     try {
@@ -47,25 +46,17 @@ const Index = () => {
     }
   };
 
-  const handleRead = async () => {
+  const handleRefreshBalance = async () => {
     try {
-      const value = await readRecord();
-      setRecord(value);
-      toast({ title: "Record fetched" });
+      if (!wallet) throw new Error("Connect wallet first");
+      const value = await getBalance(wallet);
+      setBalance(value);
+      toast({ title: "Balance updated" });
     } catch (e: any) {
-      toast({ title: "Read failed", description: e.message, variant: "destructive" });
+      toast({ title: "Balance fetch failed", description: e.message, variant: "destructive" });
     }
   };
 
-  const handleWrite = async () => {
-    try {
-      const msg = await writeRecord(input);
-      toast({ title: msg });
-      setInput("");
-    } catch (e: any) {
-      toast({ title: "Write failed", description: e.message, variant: "destructive" });
-    }
-  };
 
   const features = [
     {
@@ -202,7 +193,7 @@ const Index = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-primary" />
-                CareNova - Health Record (XION Testnet)
+CareNova - XION Testnet (Keplr)
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -214,13 +205,8 @@ const Index = () => {
                 )}
 
                 <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                  <Button onClick={handleRead} variant="secondary">Read Health Record</Button>
-                  <div className="text-sm">Current Record: {record || ""}</div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                  <Input placeholder="Enter new record..." value={input} onChange={(e) => setInput(e.target.value)} />
-                  <Button onClick={handleWrite} variant="hero">Update Record</Button>
+                  <Button onClick={handleRefreshBalance} variant="secondary">Refresh Balance</Button>
+                  <div className="text-sm">Balance: {balance || "0 XION"}</div>
                 </div>
               </div>
             </CardContent>
