@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FeatureCard from "@/components/FeatureCard";
@@ -9,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { connectWallet, readRecord, writeRecord } from "@/xion";
 import {
   Database,
   Video,
@@ -31,6 +33,39 @@ import {
 
 const Index = () => {
   const { toast } = useToast();
+  const [wallet, setWallet] = useState<string | null>(null);
+  const [record, setRecord] = useState<string>("");
+  const [input, setInput] = useState<string>("");
+
+  const handleConnect = async () => {
+    try {
+      const addr = await connectWallet();
+      setWallet(addr);
+      toast({ title: "Wallet connected", description: addr });
+    } catch (e: any) {
+      toast({ title: "Connection failed", description: e.message, variant: "destructive" as any });
+    }
+  };
+
+  const handleRead = async () => {
+    try {
+      const value = await readRecord();
+      setRecord(value);
+      toast({ title: "Record fetched" });
+    } catch (e: any) {
+      toast({ title: "Read failed", description: e.message, variant: "destructive" as any });
+    }
+  };
+
+  const handleWrite = async () => {
+    try {
+      const msg = await writeRecord(input);
+      toast({ title: msg });
+      setInput("");
+    } catch (e: any) {
+      toast({ title: "Write failed", description: e.message, variant: "destructive" as any });
+    }
+  };
 
   const features = [
     {
@@ -159,6 +194,39 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       <HeroSection />
+
+      {/* XION Testnet Demo */}
+      <section id="xion" className="py-12 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Card className="card-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-primary" />
+                CareNova - Health Record (XION Testnet)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-4">
+                {!wallet ? (
+                  <Button onClick={handleConnect}>Connect Wallet</Button>
+                ) : (
+                  <div className="text-sm text-muted-foreground">Connected: {wallet}</div>
+                )}
+
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                  <Button onClick={handleRead} variant="secondary">Read Health Record</Button>
+                  <div className="text-sm">Current Record: {record || ""}</div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+                  <Input placeholder="Enter new record..." value={input} onChange={(e) => setInput(e.target.value)} />
+                  <Button onClick={handleWrite} variant="hero">Update Record</Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
       {/* Records Section */}
       <section id="records" className="py-20 bg-muted/30">
