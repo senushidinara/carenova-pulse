@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { connectWallet, getBalance } from "@/xion";
+import { connectWallet, getBalance, pingChain } from "@/xion";
 import {
   Database,
   Video,
@@ -35,6 +35,7 @@ const Index = () => {
   const { toast } = useToast();
   const [wallet, setWallet] = useState<string | null>(null);
   const [balance, setBalance] = useState<string>("");
+  const [networkId, setNetworkId] = useState<string>("");
 
   const handleConnect = async () => {
     try {
@@ -54,6 +55,16 @@ const Index = () => {
       toast({ title: "Balance updated" });
     } catch (e: any) {
       toast({ title: "Balance fetch failed", description: e.message, variant: "destructive" });
+    }
+  };
+
+  const handleCheckNetwork = async () => {
+    try {
+      const id = await pingChain();
+      setNetworkId(id);
+      toast({ title: "XION available", description: id });
+    } catch (e: any) {
+      toast({ title: "Network check failed", description: e.message, variant: "destructive" });
     }
   };
 
@@ -198,16 +209,23 @@ CareNova - XION Testnet (Keplr)
             </CardHeader>
             <CardContent>
               <div className="flex flex-col gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                  <Button onClick={handleCheckNetwork} variant="secondary">Check XION Network</Button>
+                  <div className="text-sm">Status: {networkId ? `Available • ${networkId}` : "Not checked"}</div>
+                </div>
+
                 {!wallet ? (
                   <Button onClick={handleConnect}>Connect Keplr (XION)</Button>
                 ) : (
                   <div className="text-sm text-muted-foreground">Connected: {wallet} • Network: xion-testnet-2</div>
                 )}
 
-                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                  <Button onClick={handleRefreshBalance} variant="secondary">Refresh Balance</Button>
-                  <div className="text-sm">Balance: {balance || "0 XION"}</div>
-                </div>
+                {wallet && (
+                  <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                    <Button onClick={handleRefreshBalance} variant="secondary">Refresh Balance</Button>
+                    <div className="text-sm">Balance: {balance || "0 XION"}</div>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
