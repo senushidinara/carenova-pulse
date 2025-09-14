@@ -113,3 +113,24 @@ npm run server
 
 # Connect to test blockchain for verification features
 # Follow instructions in smart-contracts/README.md
+hCareNova/
+│
+├── frontend/                  # React + Tailwind + Framer Motion code
+│   ├── public/
+│   └── src/
+│
+├── backend/                   # Node.js + Express + PostgreSQL
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   └── server.js
+│
+├── smart-contracts/           # Blockchain verification code (zkTLS / smart contracts)
+│
+├── wearable-integration/      # Fitbit, Apple HealthKit SDK connectors
+│
+├── docs/                      # Screenshots, architecture diagrams, flowcharts
+│
+├── package.json
+├── README.md
+└── .gitignore
