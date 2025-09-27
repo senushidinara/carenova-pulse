@@ -57,10 +57,8 @@ async function suggestChain(keplr: Keplr): Promise<void> {
   };
 
   // Only available on desktop extension
-  // @ts-expect-error experimentalSuggestChain exists on Keplr extension
-  if (keplr.experimentalSuggestChain) {
-    // @ts-ignore
-    await keplr.experimentalSuggestChain(chainInfo);
+  if ((keplr as any).experimentalSuggestChain) {
+    await (keplr as any).experimentalSuggestChain(chainInfo);
   }
 }
 

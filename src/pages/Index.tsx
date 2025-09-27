@@ -3,6 +3,8 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FeatureCard from "@/components/FeatureCard";
 import EEGVisualization from "@/components/EEGVisualization";
+import { AIAnalytics } from "@/components/AIAnalytics";
+import { NASADataIntegration } from "@/components/NASADataIntegration";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -424,6 +426,36 @@ CareNova - XION Testnet (Keplr)
             </p>
           </div>
           <EEGVisualization />
+        </div>
+      </section>
+
+      {/* AI Analytics Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              AI-Powered Health Analytics
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              NASA-grade machine learning models for predictive health monitoring and intervention recommendations
+            </p>
+          </div>
+          <AIAnalytics />
+        </div>
+      </section>
+
+      {/* NASA Data Integration Section */}
+      <section className="py-16 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              NASA Data Integration
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Direct integration with NASA Human Research Program datasets for space-grade medical insights
+            </p>
+          </div>
+          <NASADataIntegration />
         </div>
       </section>
 
