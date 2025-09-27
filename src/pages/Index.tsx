@@ -5,6 +5,9 @@ import FeatureCard from "@/components/FeatureCard";
 import EEGVisualization from "@/components/EEGVisualization";
 import { AIAnalytics } from "@/components/AIAnalytics";
 import { NASADataIntegration } from "@/components/NASADataIntegration";
+import { QuantumNeuroSimulation } from "@/components/QuantumNeuroSimulation";
+import { CognitiveResilience } from "@/components/CognitiveResilience";
+import { AutonomousNeuroInterface } from "@/components/AutonomousNeuroInterface";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -456,6 +459,51 @@ CareNova - XION Testnet (Keplr)
             </p>
           </div>
           <NASADataIntegration />
+        </div>
+      </section>
+
+      {/* Quantum Neuro-Simulation Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Quantum Neuro-Simulation
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Advanced quantum computing for protein folding simulation and neurodegeneration prediction
+            </p>
+          </div>
+          <QuantumNeuroSimulation />
+        </div>
+      </section>
+
+      {/* Cognitive Resilience Section */}
+      <section className="py-16 bg-gradient-to-br from-secondary/5 to-primary/5">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Cognitive Resilience Engine
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Multi-modal intervention optimization using reinforcement learning
+            </p>
+          </div>
+          <CognitiveResilience />
+        </div>
+      </section>
+
+      {/* Autonomous Neuro-Interface Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Autonomous Neuro-Interface
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Closed-loop biofeedback with predictive environmental control
+            </p>
+          </div>
+          <AutonomousNeuroInterface />
         </div>
       </section>
 
